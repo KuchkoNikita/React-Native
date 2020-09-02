@@ -8,4 +8,5 @@ export const mapperForOpenWeather = response => ({
   wind: response.wind.speed,
   description: response.weather[0].description,
   coordinates: { lat: response.coord.lon, lng: response.coord.lat },
+  icon: response.weather[0].icon,
 });

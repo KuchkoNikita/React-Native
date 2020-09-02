@@ -1,30 +1,38 @@
 import React, {useEffect} from 'react';
-import { FlatList, SafeAreaView, Text, StyleSheet, View } from 'react-native';
+import { FlatList, SafeAreaView, Text, StyleSheet, View, Button } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux'
 
-import { searchPastRequests } from './../action/index';
+import { searchPastRequests, setCity, weatherRequest } from './../action/index';
 
 export const HistoryScreen = ({}) => {
   const dispatch = useDispatch();
   const previousRequests = useSelector(state => state.previousRequests);
-  console.log(previousRequests);
 
   //useEffect(() => dispatch(searchPastRequests()), []);
 
-const Item = ({ coordinates, city, date }) => {
-  console.log('coordinates: ', coordinates);
-  return (
-    <View style={styles.row}>
+  const Item = ({ coordinates, city, date }) => (
+    <View style={styles.row} >
       <Text style={styles.data}>{ `${date.getDate()}.${date.getMonth()}.${date.getFullYear() }`}</Text>
       <Text style={styles.time}>{ `${date.getHours()} : ${date.getMinutes() }`}</Text>
       <Text style={styles.position}>{ `latitude:${coordinates.lat} longitude:${ coordinates.lng }` }</Text>
       <Text style={styles.city}>{ city }</Text>
+      <Button 
+        title="Repeat this request"
+        onPress={() => {
+          dispatch(setCity(city));
+          dispatch(weatherRequest());
+        }}
+      />
     </View>
   )
-}
 
   const renderItem = ({ item }) => (
-    <Item date={item.date} time={item.time} coordinates={item.coordinates} city={item.city} />
+    <Item 
+      date={item.date} 
+      time={item.time} 
+      coordinates={item.coordinates} 
+      city={item.city} 
+    />
   );
 
   return (
@@ -32,7 +40,7 @@ const Item = ({ coordinates, city, date }) => {
       <FlatList 
         data={previousRequests}
         renderItem={renderItem}
-        keyExtractor={item => `${item.lat + item.lng + Math.random() * 101}`}
+        keyExtractor={item => `${item.city + item.lng + Math.random() * 101}`}
       />
     </SafeAreaView>
   )

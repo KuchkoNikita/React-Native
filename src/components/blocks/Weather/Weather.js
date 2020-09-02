@@ -9,11 +9,11 @@ export const Weather = () => {
   const tempreture = useSelector(state => state.data.tempreture);
   const humidity = useSelector(state => state.data.humidity);
   const wind = useSelector(state => state.data.wind);
-
+  const icon = useSelector(state => state.data.icon);
   return (
     <View style={styles.weather}>
       <Image 
-        source={{uri: 'http://openweathermap.org/img/wn/10d@2x.png',}} 
+        source={{uri: `http://openweathermap.org/img/wn/${icon}.png`,}} 
         style={styles.iconWeather}
       /> 
       <Text style={styles.description}>{description}</Text>
