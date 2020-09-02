@@ -1,10 +1,12 @@
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
+import { StyleSheet, View} from 'react-native';
 
-import { StyleSheet, Text, View, TextInput, Image } from 'react-native';
 import { Header } from './src/components/blocks/Header/Header';
 import { Loaction } from './src/components/blocks/Loaction/Loaction';
 import { Weather } from './src/components/blocks/Weather/Weather'
+import { AppNavigation } from './src/navigation/AppNavigation';
+
 
 const Api = {
   openweather: {
@@ -16,12 +18,7 @@ const Api = {
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Header />
-      <Loaction />
-      <Weather />
-      <StatusBar style="auto" />
-    </View>
+    <AppNavigation />
   );
 }
 
