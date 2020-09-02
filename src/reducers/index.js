@@ -2,15 +2,15 @@ import {
   SET_CITY,
   WEATHER_RESPONSE,
   WEATHER_RESPONSE_FAIL,
+  GEOLOCATION_RESPONSE_FAIL,
+  GEOLOCATION_RESPONSE
 } from './../constants/index';
 
 const initialState = {
   data: null,
-  city: 'Minsk',
-  isLoading: false,
-  isOpenMenu: false,
+  previousRequests: [],
+  currentPosition: null,
   isError: false,
-  isAutomatic: true,
 };
 
 export default function reducer(state = initialState, { type, payload }) {
@@ -23,9 +23,7 @@ export default function reducer(state = initialState, { type, payload }) {
     case WEATHER_RESPONSE: return {
       ...state,
       data: { ...payload },
-      isLoading: false,
       isError: false,
-      isAutomatic: false,
     };
 
     case WEATHER_RESPONSE_FAIL: return {
@@ -33,6 +31,15 @@ export default function reducer(state = initialState, { type, payload }) {
       isError: payload,
     };
 
+    case GEOLOCATION_RESPONSE_FAIL: return {
+      ...state,
+      isError: payload,
+    }
+
+    case GEOLOCATION_RESPONSE: return {
+      ...state,
+      currentPosition: payload,
+    }
     default:
       return state;
   }

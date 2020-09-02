@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { createStore, compose, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
 import { Provider } from 'react-redux';
@@ -20,14 +20,6 @@ const store = createStore(
   ),
 );
 
-const Api = {
-  openweather: {
-    key: 'b6ce763b1e16f6f845d8d595fa0efb2c',
-    url: 'https://api.openweathermap.org/data/2.5/',
-    urlIcon: 'http://openweathermap.org/img/wn/10d@2x.png'
-  }
-}
-
 export default function App() {
   return (
     <Provider store={store}>
@@ -35,4 +27,3 @@ export default function App() {
     </Provider>
   );
 }
-

@@ -1,19 +1,39 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, View } from 'react-native';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 
 import { Header } from '../components/blocks/Header/Header';
 import { Loaction } from '../components/blocks/Loaction/Loaction';
 import { Weather } from '../components/blocks/Weather/Weather';
+import { Error } from '../components/blocks/Error/Error'
+
+import { geolocationResponseAction } from './../action/index';
 
 export const MainScreen = ({}) => {
+  const dispatch = useDispatch();
+  const [where, setWhere] = useState(); 
   const data = useSelector(state => state.data);
   const isError = useSelector(state => state.isError);
+
+  useEffect(() => {
+    let geoOptions = {
+        enableHighAccuracy: true,
+        timeOut: 20000,
+        maximumAge: 60 * 60 * 24
+    };
+    navigator.geolocation.getCurrentPosition( geoSuccess, geoOptions);
+  }, [])
+
+  const geoSuccess = (position) => {
+    setWhere({ lat: position.coords.latitude, lng: position.coords.longitude });
+    dispatch(geolocationResponseAction(where));
+  }
 
   return (
     <View style={styles.container}>
       <Header />
+      { isError && <Error /> }
       { data && !isError && 
         <React.Fragment>
           <Loaction /> 

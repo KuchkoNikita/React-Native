@@ -1,6 +1,7 @@
 import React from 'react';
-import { View, TextInput, StyleSheet, Image, Button } from 'react-native';
+import { View, TextInput } from 'react-native';
 import { useDispatch } from 'react-redux'
+import { AntDesign } from '@expo/vector-icons'; 
 
 import styles from './HeaderStyles'; 
 import { weatherRequest, setCity } from './../../../action/index';
@@ -15,7 +16,10 @@ export const Header = () => {
         onChangeText={(text) => dispatch(setCity(text))}
         placeholder="Введите город"
       />
-      <Button
+      <AntDesign 
+        name="search1" 
+        size={24} 
+        color="white"
         style={styles.button}
         title="&#10003;"
         onPress={() => dispatch(weatherRequest())}

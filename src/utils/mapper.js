@@ -7,5 +7,5 @@ export const mapperForOpenWeather = response => ({
   humidity: response.main.humidity,
   wind: response.wind.speed,
   description: response.weather[0].description,
-  rangeId: response.weather[0].id,
+  coordinates: { lat: response.coord.lon, lng: response.coord.lat },
 });

@@ -1,16 +1,41 @@
-import React from 'react';
-import { Text, StyleSheet, View } from 'react-native';
+import React, {useEffect} from 'react';
+import { FlatList, SafeAreaView, Text, StyleSheet, View } from 'react-native';
+import { useSelector, useDispatch } from 'react-redux'
+
+import { searchPastRequests } from './../action/index';
 
 export const HistoryScreen = ({}) => {
+  const dispatch = useDispatch();
+  const previousRequests = useSelector(state => state.previousRequests);
+  console.log(previousRequests);
+
+  //useEffect(() => dispatch(searchPastRequests()), []);
+
+const Item = ({ coordinates, city, date }) => {
+  console.log('city: ', city);
+  console.log('date: ', date);
   return (
-    <View style={styles.container}>
-      <View style={styles.row}>
-        <Text style={styles.data}>12 сенября</Text>
-        <Text style={styles.time}>12.30</Text>
-        <Text style={styles.position}>12.22.33.44</Text>
-        <Text style={styles.city}>Минск</Text>
-      </View>
+    <View style={styles.row}>
+      <Text style={styles.data}>{`${date.getDate()}.${date.getMonth()}.${date.getFullYear()}`}</Text>
+      <Text style={styles.time}>{`${date.getHours()} : ${date.getMinutes()}`}</Text>
+      <Text style={styles.position}>{coordinates}</Text>
+      <Text style={styles.city}>{city}</Text>
     </View>
+  )
+}
+
+  const renderItem = ({ item }) => (
+    <Item date={item.date} time={item.time} position={item.position} city={item.city} />
+  );
+
+  return (
+    <SafeAreaView style={styles.container}>
+      <FlatList 
+        data={previousRequests}
+        renderItem={renderItem}
+        keyExtractor={item => `${item.lat + item.lng + Math.random() * 101}`}
+      />
+    </SafeAreaView>
   )
 }
 

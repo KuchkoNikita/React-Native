@@ -1,0 +1,5 @@
+import React from 'react';
+import { Text } from 'react-native';
+import styles from './ErrorStyles';
+
+export const Error = () => ( <Text style={styles.error}>Введите город</Text> );
