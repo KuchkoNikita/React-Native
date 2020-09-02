@@ -12,20 +12,19 @@ export const HistoryScreen = ({}) => {
   //useEffect(() => dispatch(searchPastRequests()), []);
 
 const Item = ({ coordinates, city, date }) => {
-  console.log('city: ', city);
-  console.log('date: ', date);
+  console.log('coordinates: ', coordinates);
   return (
     <View style={styles.row}>
-      <Text style={styles.data}>{`${date.getDate()}.${date.getMonth()}.${date.getFullYear()}`}</Text>
-      <Text style={styles.time}>{`${date.getHours()} : ${date.getMinutes()}`}</Text>
-      <Text style={styles.position}>{coordinates}</Text>
-      <Text style={styles.city}>{city}</Text>
+      <Text style={styles.data}>{ `${date.getDate()}.${date.getMonth()}.${date.getFullYear() }`}</Text>
+      <Text style={styles.time}>{ `${date.getHours()} : ${date.getMinutes() }`}</Text>
+      <Text style={styles.position}>{ `latitude:${coordinates.lat} longitude:${ coordinates.lng }` }</Text>
+      <Text style={styles.city}>{ city }</Text>
     </View>
   )
 }
 
   const renderItem = ({ item }) => (
-    <Item date={item.date} time={item.time} position={item.position} city={item.city} />
+    <Item date={item.date} time={item.time} coordinates={item.coordinates} city={item.city} />
   );
 
   return (

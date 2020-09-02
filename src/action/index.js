@@ -32,17 +32,18 @@ export const searchPastRequests = () => async (dispatch, getState) => {
 
 export const weatherRequest = () => async (dispatch, getState) => {
   const { city, previousRequests } = getState();
-  
+
   try {
     const api_call = await fetch( `https://api.openweathermap.org/data/2.5/weather?q=${ city }&appid=b6ce763b1e16f6f845d8d595fa0efb2c` );
     const response = await api_call.json();
     dispatch( weatherResponseAction( mapperForOpenWeather(response) ) );
+    
+    const { data } = getState();
+    previousRequests.push({date: new Date(), city, coordinates: data.coordinates})
   } catch (error) {
     console.error('Error: ', error);
     dispatch(weatherResponseFailAction(true));
   }
-  previousRequests.push({date: new Date(), city, coordinates: ''})
-  await AsyncStorage.setItem(PREVIOUS_REQUESTS, previousRequests);
 };
 
 // Geolocation
