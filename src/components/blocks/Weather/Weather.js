@@ -1,44 +1,25 @@
 import React from 'react';
-import { View, Text, StyleSheet, Image } from 'react-native';
+import { View, Text, Image } from 'react-native';
+import { useSelector } from 'react-redux';
+
+import styles from './WeatherStyles';
 
 export const Weather = () => {
+  const description = useSelector(state => state.data.description);
+  const tempreture = useSelector(state => state.data.tempreture);
+  const humidity = useSelector(state => state.data.humidity);
+  const wind = useSelector(state => state.data.wind);
+
   return (
     <View style={styles.weather}>
       <Image 
         source={{uri: 'http://openweathermap.org/img/wn/10d@2x.png',}} 
         style={styles.iconWeather}
       /> 
-      <Text style={styles.description}>Облочно</Text>
-      <Text style={styles.tempreture}>20 &deg;C</Text>
-      <Text style={styles.additionalParameter}>Humidity 10%</Text>
-      <Text style={styles.additionalParameter}>Wind 5 km/h</Text>
+      <Text style={styles.description}>{description}</Text>
+      <Text style={styles.tempreture}>{tempreture} &deg;C</Text>
+      <Text style={styles.additionalParameter}>Humidity {humidity}%</Text>
+      <Text style={styles.additionalParameter}>Wind {wind} km/h</Text>
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  iconWeather: {
-    width: 150, 
-    height: 150
-  },
-  weather: {
-    color: '#fff',
-    marginTop: 50,
-  },
-  description: {
-    color: '#fff',
-    fontSize: 20,
-    textAlign: 'center',
-  },
-  tempreture: {
-    color: '#fff',
-    fontSize: 48,
-    textAlign: 'center',
-  },
-  additionalParameter: {
-    color: '#fff',
-    marginTop: 20,
-    fontSize: 25,
-    textAlign: 'center',
-  },
-});

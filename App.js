@@ -1,12 +1,24 @@
-import { StatusBar } from 'expo-status-bar';
 import React from 'react';
-import { StyleSheet, View} from 'react-native';
+import { createStore, compose, applyMiddleware } from 'redux';
+import thunk from 'redux-thunk';
+import { Provider } from 'react-redux';
 
-import { Header } from './src/components/blocks/Header/Header';
-import { Loaction } from './src/components/blocks/Loaction/Loaction';
-import { Weather } from './src/components/blocks/Weather/Weather'
 import { AppNavigation } from './src/navigation/AppNavigation';
+import reducer from './src/reducers/index';
 
+const composeEnhancers =
+  typeof window === 'object' &&
+  window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__   
+    ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({
+      // Specify extension’s options like name, actionsBlacklist, actionsCreators, serialize...
+    }) : compose;
+
+const store = createStore(
+  reducer, 
+  composeEnhancers(
+    applyMiddleware(thunk),
+  ),
+);
 
 const Api = {
   openweather: {
@@ -18,15 +30,9 @@ const Api = {
 
 export default function App() {
   return (
-    <AppNavigation />
+    <Provider store={store}>
+      <AppNavigation />
+    </Provider>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#1c9bbe',
-    alignItems: 'center',
-  },
-});
 
