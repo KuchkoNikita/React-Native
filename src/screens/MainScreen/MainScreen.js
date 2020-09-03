@@ -24,7 +24,7 @@ export const MainScreen = ({}) => {
         timeOut: 20000,
         maximumAge: 60 * 60 * 24
     };
-    navigator.geolocation.getCurrentPosition( geoSuccess, geoOptions);
+    navigator.geolocation.getCurrentPosition( geoSuccess, geoSuccess, geoOptions);
   }, [])
 
   const geoSuccess = (position) => {
