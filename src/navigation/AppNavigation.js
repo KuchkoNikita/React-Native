@@ -2,8 +2,8 @@ import React from 'react';
 import { NavigationContainer  } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
-import { MainScreen } from '../screens/MainScreen';
-import { HistoryScreen } from '../screens/HistoryScreen';
+import { MainScreen } from '../screens/MainScreen/MainScreen';
+import { HistoryScreen } from '../screens/HistoryScreen/HistoryScreen';
 
 const Tab = createBottomTabNavigator();
 

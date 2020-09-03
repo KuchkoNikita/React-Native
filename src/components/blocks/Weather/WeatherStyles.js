@@ -4,7 +4,6 @@ export default StyleSheet.create({
   iconWeather: {
     width: 150, 
     height: 150,
-    textAlign: 'center',
   },
   weather: {
     color: '#fff',

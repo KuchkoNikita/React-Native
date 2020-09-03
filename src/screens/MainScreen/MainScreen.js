@@ -3,12 +3,13 @@ import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, View } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
 
-import { Header } from '../components/blocks/Header/Header';
-import { Loaction } from '../components/blocks/Loaction/Loaction';
-import { Weather } from '../components/blocks/Weather/Weather';
-import { Error } from '../components/blocks/Error/Error'
+import { Header } from '../../components/blocks/Header/Header';
+import { Loaction } from '../../components/blocks/Loaction/Loaction';
+import { Weather } from '../../components/blocks/Weather/Weather';
+import { Error } from '../../components/blocks/Error/Error'
 
-import { geolocationResponseAction, reverseGeocoding } from './../action/index';
+import { geolocationResponseAction, reverseGeocoding } from '../../action/index';
+import styles from './MainScreenStyles';
 
 export const MainScreen = ({}) => {
   const dispatch = useDispatch();
@@ -45,11 +46,3 @@ export const MainScreen = ({}) => {
     </View>
   )
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#1c9bbe',
-    alignItems: 'center',
-  },
-});

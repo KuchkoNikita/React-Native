@@ -40,7 +40,7 @@ export const weatherRequest = () => async (dispatch, getState) => {
     dispatch( weatherResponseAction( mapperForOpenWeather(response) ) );
     
     const { data } = getState();
-    previousRequests.push({date: new Date(), city, coordinates: data.coordinates})
+    previousRequests.push({ date: new Date(), data })
   } catch (error) {
     console.error('Error: ', error);
     dispatch(weatherResponseFailAction(true));
