@@ -8,7 +8,6 @@ import styles from './HistoryScreenStyles';
 
 export const HistoryScreen = ({}) => {
   const previousRequests = useSelector(state => state.previousRequests);
-  console.log('previousRequests: ', previousRequests);
 
   const renderItem = ({ item }) => (
     <Item 

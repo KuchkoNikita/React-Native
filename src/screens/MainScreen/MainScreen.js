@@ -14,12 +14,12 @@ import styles from './MainScreenStyles';
 export const MainScreen = ({}) => {
   const dispatch = useDispatch();
   const [where, setWhere] = useState(); 
+
   const data = useSelector(state => state.data);
   const isError = useSelector(state => state.isError);
 
   useEffect(() => {
-    dispatch(reverseGeocoding());
-    let geoOptions = {
+    const geoOptions = {
         enableHighAccuracy: true,
         timeOut: 20000,
         maximumAge: 60 * 60 * 24
@@ -30,10 +30,12 @@ export const MainScreen = ({}) => {
   const geoSuccess = (position) => {
     setWhere({ lat: position.coords.latitude, lng: position.coords.longitude });
     dispatch(geolocationResponseAction(where));
+    console.log('where: ', where);
+    dispatch(reverseGeocoding());
   }
 
   return (
-    <View style={styles.container}>
+    <View style={styles.container} >
       <Header />
       { isError && <Error /> }
       { data && !isError && 

@@ -1,4 +1,3 @@
-import { AsyncStorage } from 'react-native';
 import {
   WEATHER_RESPONSE,
   WEATHER_RESPONSE_FAIL,
@@ -50,17 +49,17 @@ export const weatherRequest = () => async (dispatch, getState) => {
 
 // Geolocation
 export const reverseGeocoding = () => async (dispatch, getState) => {
-  //const { currentPosition } = getState();
-  const currentPosition = { lat: -118.24, lng: 34.05, };
+  const { currentPosition } = getState();
+  //const currentPosition = { lat: 53.89, lng: 27.56, };
+  console.log('currentPosition: ', currentPosition);
   
   try {
     const api_call = await fetch( `https://geocode-maps.yandex.ru/1.x/?format=json&apikey=500e65e6-b4fb-4dbc-8abf-318ac1e1cf61&geocode=${currentPosition.lat},${currentPosition.lng}&lang=en_US` );
     const response = await api_call.json();
-    
+    console.log(mapperForYandexGeolocation(response));
     dispatch(setCity(mapperForYandexGeolocation(response)))
     dispatch(weatherRequest())
   } catch (error) {
-    console.error('Error: ', error);
     dispatch(weatherResponseFailAction(true));
   }
 };
