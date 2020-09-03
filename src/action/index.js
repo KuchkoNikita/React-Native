@@ -1,4 +1,4 @@
-import { AsyncStorage } from '@react-native-community/async-storage'
+import { AsyncStorage } from 'react-native';
 import {
   WEATHER_RESPONSE,
   WEATHER_RESPONSE_FAIL,
@@ -6,6 +6,7 @@ import {
   PREVIOUS_REQUESTS,
   GEOLOCATION_RESPONSE_FAIL,
   GEOLOCATION_RESPONSE,
+  GEOLOCATION_CURRENT
 } from './../constants/index';
 import {
   mapperForOpenWeather,
@@ -27,9 +28,6 @@ export const weatherResponseFailAction = error => ({
   payload: error,
 });
 
-export const searchPastRequests = () => async (dispatch, getState) => {
-  const previousRequests = await AsyncStorage.getItem(PREVIOUS_REQUESTS);
-};
 
 export const weatherRequest = () => async (dispatch, getState) => {
   const { city, previousRequests } = getState();
@@ -53,10 +51,7 @@ export const weatherRequest = () => async (dispatch, getState) => {
 // Geolocation
 export const reverseGeocoding = () => async (dispatch, getState) => {
   //const { currentPosition } = getState();
-  const currentPosition = {
-    lat: -118.24,
-    lng: 34.05,
-  };
+  const currentPosition = { lat: -118.24, lng: 34.05, };
   
   try {
     const api_call = await fetch( `https://geocode-maps.yandex.ru/1.x/?format=json&apikey=500e65e6-b4fb-4dbc-8abf-318ac1e1cf61&geocode=${currentPosition.lat},${currentPosition.lng}&lang=en_US` );
@@ -70,12 +65,17 @@ export const reverseGeocoding = () => async (dispatch, getState) => {
   }
 };
 
+export const setCurrentGeolocation = (position) => ({
+  type: GEOLOCATION_CURRENT,
+  payload: position
+});
+
 export const geolocationResponseAction = (position) => ({
   type: GEOLOCATION_RESPONSE,
   payload: position
-})
+});
 
 export const geolocationResponseFailAction = (err) => ({
   type: GEOLOCATION_RESPONSE_FAIL,
   payload: err.message
-})
+});

@@ -3,7 +3,8 @@ import {
   WEATHER_RESPONSE,
   WEATHER_RESPONSE_FAIL,
   GEOLOCATION_RESPONSE_FAIL,
-  GEOLOCATION_RESPONSE
+  GEOLOCATION_RESPONSE,
+  GEOLOCATION_CURRENT
 } from './../constants/index';
 
 const initialState = {
@@ -40,6 +41,12 @@ export default function reducer(state = initialState, { type, payload }) {
       ...state,
       currentPosition: payload,
     }
+
+    case GEOLOCATION_CURRENT: return {
+      ...state,
+      previousRequests: payload,
+    }
+
     default:
       return state;
   }

@@ -1,18 +1,14 @@
-import React, {useEffect, useState} from 'react';
-import { FlatList, SafeAreaView, Text, StyleSheet, View, Button } from 'react-native';
+import React, { useEffect } from 'react';
+import { FlatList, SafeAreaView, AsyncStorage } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux'
 
 import { Item } from '../../components/controls/Item/Item';
-import { searchPastRequests, setCity, weatherRequest } from '../../action/index';
 
-//import styles from './MainScreenStyles';
+import styles from './HistoryScreenStyles';
 
 export const HistoryScreen = ({}) => {
-  const dispatch = useDispatch();
-  const [isModal, setIsModal] = useState(false);
   const previousRequests = useSelector(state => state.previousRequests);
-
-  //useEffect(() => dispatch(searchPastRequests()), []);
+  console.log('previousRequests: ', previousRequests);
 
   const renderItem = ({ item }) => (
     <Item 
@@ -31,19 +27,3 @@ export const HistoryScreen = ({}) => {
     </SafeAreaView>
   )
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#f26122',
-    alignItems: 'center',
-  },
-  row: {
-    marginTop: 20,
-    backgroundColor: '#fff',
-    alignSelf: 'stretch'
-  },
-  parametrs: {
-    fontSize: 20
-  }
-});

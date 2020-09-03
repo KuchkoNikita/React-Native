@@ -4,6 +4,7 @@ import { useDispatch } from 'react-redux'
 
 import styles from './ItemStyle';
 import { EditModal } from '../editModal/EditModal';
+import { setCity, weatherRequest } from '../../../action/index'
 
 export const Item = ({ date, data }) => {
   const dispatch = useDispatch();
