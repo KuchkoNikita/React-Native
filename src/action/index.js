@@ -8,7 +8,8 @@ import {
   GEOLOCATION_RESPONSE,
 } from './../constants/index';
 import {
-  mapperForOpenWeather
+  mapperForOpenWeather,
+  mapperForYandexGeolocation
 } from './../utils/index';
 
 export const setCity = text => ({
@@ -32,7 +33,6 @@ export const searchPastRequests = () => async (dispatch, getState) => {
 
 export const weatherRequest = () => async (dispatch, getState) => {
   const { city, previousRequests } = getState();
-  console.log(city);
   
   try {
     const api_call = await fetch( `https://api.openweathermap.org/data/2.5/weather?q=${ city }&appid=b6ce763b1e16f6f845d8d595fa0efb2c` );
@@ -48,6 +48,23 @@ export const weatherRequest = () => async (dispatch, getState) => {
 };
 
 // Geolocation
+export const reverseGeocoding = () => async (dispatch, getState) => {
+  const currentPosition = {
+    lat: -118.24,
+    lng: 34.05,
+  };
+  
+  try {
+    const api_call = await fetch( `https://geocode-maps.yandex.ru/1.x/?format=json&apikey=500e65e6-b4fb-4dbc-8abf-318ac1e1cf61&geocode=${currentPosition.lat},${currentPosition.lng}&lang=en_US` );
+    const response = await api_call.json();
+    
+    dispatch(setCity(mapperForYandexGeolocation(response)))
+    dispatch(weatherRequest())
+  } catch (error) {
+    console.error('Error: ', error);
+    dispatch(weatherResponseFailAction(true));
+  }
+};
 
 export const geolocationResponseAction = (position) => ({
   type: GEOLOCATION_RESPONSE,
@@ -58,13 +75,3 @@ export const geolocationResponseFailAction = (err) => ({
   type: GEOLOCATION_RESPONSE_FAIL,
   payload: err.message
 })
-/*
-export const getCurrentPosition = () => async (dispatch, getState) => {
-  let geoOptions = {
-    enableHighAccuracy: true,
-    timeOut: 20000,
-    maximumAge: 60 * 60 * 24
-  };
-  
-  navigator.geolocation.getCurrentPosition( dispatch(geolocationResponseAction), dispatch(geolocationResponseFailAction), geoOptions);
-}*/

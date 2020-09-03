@@ -10,3 +10,5 @@ export const mapperForOpenWeather = response => ({
   coordinates: { lat: response.coord.lon, lng: response.coord.lat },
   icon: response.weather[0].icon,
 });
+
+export const mapperForYandexGeolocation = response => response.response.GeoObjectCollection.featureMember[2].GeoObject.name;

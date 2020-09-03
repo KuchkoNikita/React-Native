@@ -8,7 +8,7 @@ import { Loaction } from '../components/blocks/Loaction/Loaction';
 import { Weather } from '../components/blocks/Weather/Weather';
 import { Error } from '../components/blocks/Error/Error'
 
-import { geolocationResponseAction } from './../action/index';
+import { geolocationResponseAction, reverseGeocoding } from './../action/index';
 
 export const MainScreen = ({}) => {
   const dispatch = useDispatch();
@@ -17,6 +17,7 @@ export const MainScreen = ({}) => {
   const isError = useSelector(state => state.isError);
 
   useEffect(() => {
+    dispatch(reverseGeocoding());
     let geoOptions = {
         enableHighAccuracy: true,
         timeOut: 20000,
