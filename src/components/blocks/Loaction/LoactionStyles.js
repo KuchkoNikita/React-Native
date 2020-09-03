@@ -2,7 +2,7 @@ import { StyleSheet } from 'react-native';
 
 export default StyleSheet.create({
   loaction: {
-    marginTop: 70,
+    marginTop: 30,
   },
   city: {
     color: '#fff',

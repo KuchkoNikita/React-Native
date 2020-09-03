@@ -37,7 +37,10 @@ export const weatherRequest = () => async (dispatch, getState) => {
   try {
     const api_call = await fetch( `https://api.openweathermap.org/data/2.5/weather?q=${ city }&appid=b6ce763b1e16f6f845d8d595fa0efb2c` );
     const response = await api_call.json();
-    dispatch( weatherResponseAction( mapperForOpenWeather(response) ) );
+    
+    (response.cod === 200) 
+      ? dispatch( weatherResponseAction( mapperForOpenWeather(response) ) ) 
+      : dispatch(weatherResponseFailAction(true)); 
     
     const { data } = getState();
     previousRequests.push({ date: new Date(), data })
@@ -49,6 +52,7 @@ export const weatherRequest = () => async (dispatch, getState) => {
 
 // Geolocation
 export const reverseGeocoding = () => async (dispatch, getState) => {
+  //const { currentPosition } = getState();
   const currentPosition = {
     lat: -118.24,
     lng: 34.05,

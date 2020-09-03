@@ -7,7 +7,7 @@ export default StyleSheet.create({
   },
   weather: {
     color: '#fff',
-    marginTop: 50,
+    marginTop: 20,
   },
   description: {
     color: '#fff',

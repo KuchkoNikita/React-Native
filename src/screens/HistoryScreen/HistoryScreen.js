@@ -14,14 +14,12 @@ export const HistoryScreen = ({}) => {
 
   //useEffect(() => dispatch(searchPastRequests()), []);
 
-  const renderItem = ({ item }) => {
-    console.log('item: ', item);
-    return (
+  const renderItem = ({ item }) => (
     <Item 
       date={item.date} 
       data={item.data}
     />
-  )};
+  );
 
   return (
     <SafeAreaView style={styles.container}>
