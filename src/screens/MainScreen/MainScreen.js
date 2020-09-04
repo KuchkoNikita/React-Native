@@ -1,12 +1,13 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, Component } from 'react';
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, View } from 'react-native';
+import { View } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
 
 import { Header } from '../../components/blocks/Header/Header';
 import { Loaction } from '../../components/blocks/Loaction/Loaction';
 import { Weather } from '../../components/blocks/Weather/Weather';
 import { Error } from '../../components/blocks/Error/Error'
+import { Coordinates } from '../../components/blocks/Coordinates/Coordinates';
 
 import { geolocationResponseAction, reverseGeocoding } from '../../action/index';
 import styles from './MainScreenStyles';
@@ -30,13 +31,13 @@ export const MainScreen = ({}) => {
   const geoSuccess = (position) => {
     setWhere({ lat: position.coords.latitude, lng: position.coords.longitude });
     dispatch(geolocationResponseAction(where));
-    console.log('where: ', where);
     dispatch(reverseGeocoding());
   }
 
   return (
     <View style={styles.container} >
       <Header />
+      { data && <Coordinates /> }
       { isError && <Error /> }
       { data && !isError && 
         <React.Fragment>

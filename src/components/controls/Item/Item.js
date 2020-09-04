@@ -12,7 +12,6 @@ export const Item = ({ date, data }) => {
 
   return (
     <View style={styles.row} >
-      <EditModal visible={isModal} setVisible={setIsModal} data={data}/>
       <Text style={styles.parametrs}>{ `Date: ${date.getDate()}.${date.getMonth()}.${date.getFullYear() }`}</Text>
       <Text style={styles.parametrs}>{ `Time: ${date.getHours()} : ${date.getMinutes() }`}</Text>
       <Text style={styles.parametrs}>{ `latitude:${ data.coordinates.lat } longitude:${ data.coordinates.lng }` }</Text>
@@ -30,6 +29,7 @@ export const Item = ({ date, data }) => {
           setIsModal(true)
         }}
       />
+      <EditModal visible={isModal} setVisible={setIsModal} data={data}/>
     </View>
   )
 }

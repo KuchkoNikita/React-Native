@@ -11,4 +11,5 @@ export const mapperForOpenWeather = response => ({
   icon: response.weather[0].icon,
 });
 
-export const mapperForYandexGeolocation = response => response.response.GeoObjectCollection.featureMember[4].GeoObject.name;
+export const mapperForYandexGeolocation1 = response => response.response.GeoObjectCollection.featureMember[2].GeoObject.name;
+export const mapperForYandexGeolocation2 = response => response.response.GeoObjectCollection.featureMember[2].GeoObject.name;

@@ -2,7 +2,7 @@ import { StyleSheet } from 'react-native';
 
 export default StyleSheet.create({
   row: {
-    marginTop: 20,
+    marginTop: 50,
     backgroundColor: '#fff',
     alignSelf: 'stretch'
   },

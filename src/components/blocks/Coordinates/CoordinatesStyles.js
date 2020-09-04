@@ -1,9 +1,9 @@
 import { StyleSheet } from 'react-native';
 
 export default StyleSheet.create({
-  parametrs: {
+  coordinates: {
+    color: '#fff',
+    fontSize: 19,
     textAlign: 'center',
-    fontSize: 15,
-    width: 250,
   },
 });

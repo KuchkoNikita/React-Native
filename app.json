@@ -19,7 +19,7 @@
     "ios": {
       "supportsTablet": true,
       "buildNumber": "1.0.0",
-      "bundleIdentifier": "com.yourcompany.yourappname",
+      "bundleIdentifier": "com.yourcompany.yourappname"
     },
     "web": {
       "favicon": "./assets/favicon.png"
